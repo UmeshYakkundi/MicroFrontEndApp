@@ -1,0 +1,193 @@
+<div style="padding: 10px;">
+  <h1 style="font-family: sans-serif;text-align: center;margin-bottom: 10px;">{{deviceName}}</h1>
+
+  <div class="card-container">
+    <div class="card">
+      <div class="container">
+        <h4><b>Storage Device</b></h4>
+        <div class="property">
+
+        </div>
+        <div class="property">
+          <label>Host name</label>
+          <span class="property-value">{{hostName}}</span>
+        </div>
+        <div class="property">
+          <label>Drive name</label>
+          <span class="property-value">{{driveName}}</span>
+        </div>
+        <div class="property">
+          <label>Volume name</label>
+          <span class="property-value">{{volumeName}}</span>
+        </div>
+        <div class="property">
+          <label>Disk name</label>
+          <span class="property-value">{{diskName}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="height: 160px">
+        <div class="container">
+          <h4><b>Notifications</b></h4>
+
+          <div style="display:flex;justify-content: space-between;">
+
+            <div>
+              <div style="display:flex;">
+                <div>
+                  <img width="32" height="32"
+                    src="https://img.icons8.com/external-wanicon-lineal-wanicon/64/external-advice-training-and-coaching-wanicon-lineal-wanicon.png"
+                    alt="external-advice-training-and-coaching-wanicon-lineal-wanicon" />
+                </div>
+                <div>
+                  <div class="notif-label">Advisor</div>
+                  <div class="notif-val">{{advisoryCount}}</div>
+                  <div class="notif-tag" style="background-color: darkred;">{{criticalCount}} critical</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex;">
+                <div>
+                  <img width="32" height="32"
+                    src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/external-bell-calendar-and-date-kmg-design-detailed-outline-kmg-design.png"
+                    alt="external-bell-calendar-and-date-kmg-design-detailed-outline-kmg-design" />
+                </div>
+                <div>
+                  <div class="notif-label">Alerts</div>
+                  <div class="notif-val">{{alertsCount}}</div>
+                  <div class="notif-tag" style="background-color: darkgoldenrod;color:white">{{warningsCount}} warnings
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex;">
+                <div>
+                  <img width="32" height="32" src="https://img.icons8.com/wired/64/two-tickets.png" alt="two-tickets" />
+                </div>
+                <div>
+                  <div class="notif-label">Tickets</div>
+                  <div class="notif-val">{{ticketsCount}}</div>
+                  <div class="notif-tag" style="background-color: grey;">{{todaysCount}} created today</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card" style="height: 160px;">
+        <div class="container">
+          <h4><b>Storage Capacity</b></h4>
+          <div class="property" style="font-weight: 500;">
+            <div style="display: flex; width:100%;font-size: 13px;;">
+              <div class="d-50">Total: {{formattedCapacity}}</div>
+              <div class="d-50" style="text-align: end;">Available: {{formattedAvailableSize}}</div>
+            </div>
+
+            <div style="border: 1px solid lightskyblue; width: 100%;height:15px;">
+              <div class="used-cap" [ngStyle]="{'width': usedPct+'%'}"></div>
+            </div>
+
+            <div style="display: flex; width:100%;font-size: 13px;;">
+              <div class="d-50">Savings: {{savingsPct}}%</div>
+              <div class="d-50" style="text-align: end;">Reclaimable: {{reclaimablePct}}%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="card">
+      <div class="container">
+        <h4><b>Data Protection</b></h4>
+        <div class="property" style="display: flex;width: 100%;justify-content: center;">
+          <div class="chart">
+            <canvasjs-chart *ngIf="showChart" [options]="dpChartOptions"
+              [styles]="{width: '100%', height:'200px'}"></canvasjs-chart>
+          </div>
+          <div style="display: flex; align-items: center; margin-left: 10px;font-weight: 100;">
+            <div>
+              <div style="display: flex;column-gap: 5px;">
+                <div class="legend-box" style="background-color:  rgb(36, 134, 176)">&nbsp;</div>
+                <div class="legend-property">
+                  <div class="legend-label">FlashCopy</div>
+                  <div class="legend-value">{{getFormattedCapacity(flashCopyVal)}} ({{flashCopyPct}}%)</div>
+                </div>
+              </div>
+
+              <div style="display: flex;column-gap: 5px;">
+                <div class="legend-box" style="background-color:  rgb(145, 60, 60);">&nbsp;</div>
+                <div class="legend-property">
+                  <div class="legend-label">2 site Async Replication</div>
+                  <div class="legend-value">{{getFormattedCapacity(asyncReplVal)}} ({{asyncReplPct}}%)</div>
+                </div>
+              </div>
+
+              <div style="display: flex;column-gap: 5px;">
+                <div class="legend-box" style="background-color:rgb(125, 179, 113);">&nbsp;</div>
+                <div class="legend-property">
+                  <div class="legend-label">2 site Sync Replication</div>
+                  <div class="legend-value">{{getFormattedCapacity(syncReplVal)}} ({{syncReplPct}}%)</div>
+                </div>
+              </div>
+
+              <div style="display: flex;column-gap: 5px;">
+                <div class="legend-box" style="background-color:  lightseagreen;;">&nbsp;</div>
+                <div class="legend-property">
+                  <div class="legend-label">Unprotected</div>
+                  <div class="legend-value">{{getFormattedCapacity(unprotectedVal)}} ({{unprotectedPct}}%)</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="container">
+        <h4><b>Power and sustainability</b></h4>
+
+        <div style="margin: 10px 0 15px 10px;display:flex;">
+          <div style="padding: 3px;"><img width="28" height="28" src="https://img.icons8.com/color/48/greentech.png"
+              alt="greentech" /></div>
+          <div style="margin-top:6px">
+            <div class="sustain-label">Today's CO2e emission</div>
+            <div style="font-size: 14px;font-weight: 200;">{{todayCo2}} <span
+                style="font-size:16px">KG&nbsp;&nbsp;</span><span style="font-size: 15px;display: inline-flex">(
+                <img *ngIf="todayCo2ChangePct > 0" width="13" height="13"
+                  src="https://img.icons8.com/emoji/32/red-triangle-pointed-up-emoji.png"
+                  alt="red-triangle-pointed-up-emoji" />
+                <span *ngIf="todayCo2ChangePct < 0" style="margin-top:-7px">
+                  <img width="24" height="24" src="https://img.icons8.com/glyph-neue/16/40C057/sort-down.png"
+                    alt="sort-down" />
+                </span>{{todayCo2ChangePct}}%)</span></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <canvasjs-chart *ngIf="showChart" [options]="powerChartOptions"
+            [styles]="{width: '100%', height:'200px'}"></canvasjs-chart>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>

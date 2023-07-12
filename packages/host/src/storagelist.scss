@@ -1,0 +1,49 @@
+.left-content {
+  height: 100%;
+  min-height: 80vh;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+
+  .device-list {
+    list-style-type: none;
+    padding: 10px;
+    min-height: 500px;
+    cursor: pointer;
+
+    .device-item {
+      margin: 5px;
+      height: 40px;
+      padding-top: 15px;
+    }
+
+    .bg-color {
+      background-color: #f1f1f1;
+    }
+
+    :hover {
+      background-color: #f0f8ff;
+    }
+
+    .device-name {
+      display: inline-block;
+      width: 48%;
+      text-align: left;
+      opacity: 0.7;
+    }
+
+    .device-capacity {
+      display: inline-block;
+      width: 48%;
+      text-align: right;
+      opacity: 0.5;
+    }
+
+    .selected {
+      background: #ede0e0;
+    }
+  }
+}

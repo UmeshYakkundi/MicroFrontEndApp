@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Network</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style type="text/css">
+    body {
+      width: 600px;
+      height: 600px;
+    }
+
+    #mynetwork {
+      width: 600px;
+      height: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mynetwork"></div>
+  <script type="text/javascript">
+    // create a network
+    var container = document.getElementById("mynetwork");
+    var options = {};
+
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      { id: 1, label: "apm00145042834" },
+      { id: 2, label: "tucson.ibm.com" },
+      { id: 3, label: "shrimp8" },
+      { id: 4, label: "vol0" },
+      { id: 5, label: "ACH Node1" },
+      { id: 6, label: "disk1" },
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+      { from: 1, to: 3, arrows: "to", dashes: true },
+      { from: 1, to: 2, arrows: "to" },
+      { from: 1, to: 4, arrows: "to" },
+      { from: 1, to: 5, arrows: "to, from", dashes: true },
+      { from: 1, to: 6, arrows: "to", dashes: true },
+    ]);
+
+    
+    var data = {
+      nodes: nodes,
+      edges: edges,
+    };
+    
+    var network = new vis.Network(container, data, options);
+
+    network.on("click", function (params) {
+        
+          var selectedResource = "";
+            switch (this.getNodeAt(params.pointer.DOM)) {
+              case 1:
+                selectedResource = selectedDevice.name;
+                break;
+              case 2:
+                selectedResource = selectedDevice.hostName;
+                break;
+              case 3:
+                selectedResource = selectedDevice.driveName;
+                break;
+              case 4:
+                selectedResource = selectedDevice.volumeName;
+                break;
+              case 5:
+                selectedResource = selectedDevice.nodeName;
+                break;
+              case 6:
+                selectedResource = selectedDevice.diskName;
+                break;
+                selectedResource = selectedDevice.name;
+              default:
+                break;
+            }
+            window.postMessage(selectedResource);
+      });
+
+  </script>
+</body>
+
+</html>

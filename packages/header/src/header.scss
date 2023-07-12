@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    padding: 9px;
+    color: #fff;
+    font-family: 'Helvetica', sans-serif; /* Add a premium font */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+
+  
+  .header-title {
+    font-size: 20px; /* Increase font size for a more prominent title */
+    margin: 0;
+    font-weight: 600; /* Add boldness to the title */
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .header-menu-item {
+    margin-right: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500; /* Add some weight to the menu items */
+    opacity: 0.8; /* Reduce opacity for a subtle effect */
+  }
+  
+  .header-menu-item:hover {
+    color: #8b8b8bb6;
+    opacity: 1; /* Increase opacity on hover */
+  }
